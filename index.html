@@ -7,6 +7,7 @@
 <meta name="description" content="WordPress Developer with 3+ years building scalable production platforms — custom themes, plugins, WooCommerce & performance.">
 <meta property="og:title" content="Deep Rank — Portfolio">
 <meta property="og:description" content="3+ years building scalable production WordPress platforms.">
+<meta property="og:image" content="https://rankdeep.github.io/assets/og-cover.png">
 <meta property="og:url" content="https://rankdeep.github.io">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -489,7 +490,7 @@ html.dark h1, html.dark h2, html.dark h3 {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  will-change: contents;
+  will-change: transform;
 }
 body::before {
   content: "";
@@ -2181,7 +2182,7 @@ body::before {
         </p>
         <div class="hero__actions">
           <a href="#work" class="btn btn--primary">View Portfolio</a>
-          <a href="mailto:rankdeep@gmail.com" class="btn btn--glass">Get in Touch</a>
+          <a href="/cdn-cgi/l/email-protection#3341525d585756564373545e525a5f1d505c5e" class="btn btn--glass">Get in Touch</a>
         </div>
         <div class="hero__stats">
           <div class="stat">
@@ -2309,7 +2310,7 @@ body::before {
       </article>
       <!-- Case Study 2 -->
       <article class="case-study-card reveal reveal-delay-1">
-        <img src="Devamrita-Swami_home.webp" alt="Devamrita Swami website homepage" class="case-study-card__img">
+        <img src="Devamrita-Swami_home.webp alt="Devamrita Swami website homepage" class="case-study-card__img">
         <div class="case-study-card__body">
           <div class="case-study-card__category">WordPress · Personal Brand</div>
           <h3 class="case-study-card__title">Devamrita Swami Website</h3>
@@ -2364,7 +2365,7 @@ body::before {
         <p>I actively integrate AI-assisted workflows into my development process to accelerate debugging, solution design, and routine engineering tasks — keeping delivery fast without cutting corners on quality.</p>
         <p>I hold a Bachelor of Engineering in Information Technology from A.D. Patel Institute of Technology, Karamsad, graduating with an 8.03 CGPA.</p>
         <div style="display:flex;gap:16px;margin-top:32px;flex-wrap:wrap;">
-          <a href="mailto:rankdeep@gmail.com" class="btn btn--primary">Hire Me</a>
+          <a href="/cdn-cgi/l/email-protection#572536393c3332322717303a363e3b7934383a" class="btn btn--primary">Hire Me</a>
           <a href="https://linkedin.com/in/rankdeep18" class="btn btn--glass" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </div>
@@ -2541,7 +2542,7 @@ body::before {
       </div>
 
       <!-- Step 5 -->
-      <div class="process-step reveal reveal-delay-3">
+      <div class="process-step process-step--last reveal reveal-delay-3">
         <div class="process-step__card glass glass-prism glass-glow">
           <div class="process-step__num">05</div>
           <div class="process-step__icon">🚀</div>
@@ -2590,7 +2591,7 @@ body::before {
       <h2 class="section-title" style="margin-bottom:14px;">Got a Project in Mind?</h2>
       <p class="section-subtitle" style="margin:0 auto 36px;">Whether you need a custom theme, plugin, or full-stack web platform — let's build it together.</p>
       <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;position:relative;z-index:1;">
-        <a href="mailto:rankdeep@gmail.com" class="btn btn--primary">Start a Conversation</a>
+        <a href="/cdn-cgi/l/email-protection#5b293a35303f3e3e2b1b3c363a323775383436" class="btn btn--primary">Start a Conversation</a>
         <a href="https://linkedin.com/in/rankdeep18" target="_blank" rel="noopener" class="btn btn--glass">LinkedIn</a>
       </div>
     </div>
@@ -2607,7 +2608,7 @@ body::before {
         <div class="site-logo">DR<span>.</span></div>
         <p>Software Engineer building scalable production WordPress platforms with end-to-end ownership from requirements to deployment.</p>
         <div class="footer-socials">
-          <a href="mailto:rankdeep@gmail.com">Email</a>
+          <a href="/cdn-cgi/l/email-protection#addfccc3c6c9c8c8ddedcac0ccc4c183cec2c0">Email</a>
           <a href="https://linkedin.com/in/rankdeep18" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </div>
@@ -2639,7 +2640,7 @@ body::before {
 </footer>
 
 <!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
 (function () {
@@ -2688,10 +2689,10 @@ body::before {
     function init() {
       resize();
       var mobile=W<768,tablet=W<1024;
-      stars=Array.from({length:mobile?60:tablet?100:160},star);
-      verts=Array.from({length:mobile?8:tablet?14:24},vert);
-      scans=Array.from({length:mobile?2:5},scan);
-      parts=Array.from({length:mobile?18:tablet?30:50},part);
+      stars=Array.from({length:mobile?20:tablet?80:160},star);
+      verts=Array.from({length:mobile?3:tablet?10:24},vert);
+      scans=Array.from({length:mobile?0:tablet?2:5},scan);
+      parts=Array.from({length:mobile?0:tablet?20:50},part);
     }
 
     function draw() {
@@ -2727,7 +2728,7 @@ body::before {
         cx.beginPath();cx.arc(p.x,p.y,p.r,0,6.28);
         cx.fillStyle='rgba('+ar[0]+','+ar[1]+','+ar[2]+','+(p.a*p.life)+')';cx.fill();
       });
-      if(frame%320===0&&!shoot){shoot={sx:Math.random()*W,sy:Math.random()*H*.35,t:0};}
+      if(frame>0&&frame%320===0&&!shoot){shoot={sx:Math.random()*W,sy:Math.random()*H*.35,t:0};}
       if(shoot){
         var s=shoot,dx=s.t*180,dy=s.t*68;
         var g=cx.createLinearGradient(s.sx+dx,s.sy+dy,s.sx+dx-80,s.sy+dy-28);
@@ -2737,12 +2738,15 @@ body::before {
         cx.strokeStyle=g;cx.lineWidth=1.5;cx.stroke();
         shoot.t+=.065;if(shoot.t>1)shoot=null;
       }
-      requestAnimationFrame(draw);
+      loop();
     }
 
     var resizeTimer;
     window.addEventListener('resize',function(){clearTimeout(resizeTimer);resizeTimer=setTimeout(function(){init();refreshColors();},150);});
-    init();draw();
+    var rafId;
+    function loop(){rafId=requestAnimationFrame(draw);}
+    document.addEventListener('visibilitychange',function(){if(document.hidden)cancelAnimationFrame(rafId);else loop();});
+    init();loop();
   })();
 
   /* ── Cursor Glow ── */
@@ -2809,7 +2813,7 @@ body::before {
   } else els.forEach(function(el){el.classList.add('in-view');});
 
   /* ── Card Tilt ── */
-  document.querySelectorAll('.service-card,.hero__glass-card,.case-study-card,.blog-card').forEach(function(c){
+  document.querySelectorAll('.service-card,.hero__glass-card,.case-study-card,.blog-card,.process-step__card').forEach(function(c){
     c.addEventListener('mousemove',function(e){
       var r=c.getBoundingClientRect();
       var dx=(e.clientX-(r.left+r.width/2))/(r.width/2);
@@ -2879,15 +2883,4 @@ body::before {
       b.addEventListener('click',function(e){e.stopPropagation();applyTheme(localStorage.getItem(CK)||'ocean',b.dataset.mode);});
     });
     document.querySelectorAll('.pp-theme-row').forEach(function(b){
-      b.addEventListener('click',function(e){e.stopPropagation();applyTheme(b.dataset.theme,localStorage.getItem(MK)||'dark');});
-    });
-  }
-
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',buildSwitcher);
-  else buildSwitcher();
-
-})();
-</script>
-
-</body>
-</html>
+      b.addEventListener('c
