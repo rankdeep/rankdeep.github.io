@@ -2659,6 +2659,9 @@ body::before {
   /* ─────────────────────────────────────────────
      CANVAS BACKGROUND
   ───────────────────────────────────────────── */
+
+   if (matchMedia('(max-width: 768px)').matches) return;
+   
   (function canvas() {
     var cv = document.getElementById('bg-canvas');
     if (!cv) return;
