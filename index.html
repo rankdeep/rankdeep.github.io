@@ -488,7 +488,7 @@ html.dark h1, html.dark h2, html.dark h3 {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  will-change: transform;
+  will-change: contents;
 }
 body::before {
   content: "";
@@ -2119,6 +2119,23 @@ body::before {
   }
 }
 
+@media (max-width: 900px), (prefers-reduced-motion: reduce) {
+  #bg-canvas {
+    display: none !important;
+  }
+  .nav-menu.open,
+  .hero__glass-card,
+  .service-card,
+  .case-study-card,
+  .blog-card,
+  .process-step__card,
+  .pp-panel,
+  .pp-trigger {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -2180,7 +2197,7 @@ body::before {
         </p>
         <div class="hero__actions">
           <a href="#work" class="btn btn--primary">View Portfolio</a>
-          <a href="/cdn-cgi/l/email-protection#9fedfef1f4fbfafaefdff8f2fef6f3b1fcf0f2" class="btn btn--glass">Get in Touch</a>
+          <a href="mailto:rankdeep@gmail.com" class="btn btn--glass">Get in Touch</a>
         </div>
         <div class="hero__stats">
           <div class="stat">
@@ -2363,7 +2380,7 @@ body::before {
         <p>I actively integrate AI-assisted workflows into my development process to accelerate debugging, solution design, and routine engineering tasks — keeping delivery fast without cutting corners on quality.</p>
         <p>I hold a Bachelor of Engineering in Information Technology from A.D. Patel Institute of Technology, Karamsad, graduating with an 8.03 CGPA.</p>
         <div style="display:flex;gap:16px;margin-top:32px;flex-wrap:wrap;">
-          <a href="/cdn-cgi/l/email-protection#3547545b5e51505045755258545c591b565a58" class="btn btn--primary">Hire Me</a>
+          <a href="mailto:rankdeep@gmail.com" class="btn btn--primary">Hire Me</a>
           <a href="https://linkedin.com/in/rankdeep18" class="btn btn--glass" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </div>
@@ -2540,7 +2557,7 @@ body::before {
       </div>
 
       <!-- Step 5 -->
-      <div class="process-step process-step--last reveal reveal-delay-3">
+      <div class="process-step reveal reveal-delay-3">
         <div class="process-step__card glass glass-prism glass-glow">
           <div class="process-step__num">05</div>
           <div class="process-step__icon">🚀</div>
@@ -2589,7 +2606,7 @@ body::before {
       <h2 class="section-title" style="margin-bottom:14px;">Got a Project in Mind?</h2>
       <p class="section-subtitle" style="margin:0 auto 36px;">Whether you need a custom theme, plugin, or full-stack web platform — let's build it together.</p>
       <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;position:relative;z-index:1;">
-        <a href="/cdn-cgi/l/email-protection#1d6f7c73767978786d5d7a707c7471337e7270" class="btn btn--primary">Start a Conversation</a>
+        <a href="mailto:rankdeep@gmail.com" class="btn btn--primary">Start a Conversation</a>
         <a href="https://linkedin.com/in/rankdeep18" target="_blank" rel="noopener" class="btn btn--glass">LinkedIn</a>
       </div>
     </div>
@@ -2606,7 +2623,7 @@ body::before {
         <div class="site-logo">DR<span>.</span></div>
         <p>Software Engineer building scalable production WordPress platforms with end-to-end ownership from requirements to deployment.</p>
         <div class="footer-socials">
-          <a href="/cdn-cgi/l/email-protection#4b392a25202f2e2e3b0b2c262a222765282426">Email</a>
+          <a href="mailto:rankdeep@gmail.com">Email</a>
           <a href="https://linkedin.com/in/rankdeep18" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </div>
@@ -2638,7 +2655,7 @@ body::before {
 </footer>
 
 <!-- Bootstrap JS -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
 (function () {
@@ -2647,9 +2664,15 @@ body::before {
   /* ── Anti-FOUC: apply saved theme before paint ── */
   var THEMES=['ocean','aurora','emerald','eclipse','crimson','ice','gold'];
   var CK='pp12-theme',MK='pp12-mode';
+  function storageGet(key,fallback){
+    try{return localStorage.getItem(key)||fallback;}catch(_){return fallback;}
+  }
+  function storageSet(key,value){
+    try{localStorage.setItem(key,value);}catch(_){}
+  }
   (function(){
-    var t=localStorage.getItem(CK)||'ocean';
-    var m=localStorage.getItem(MK)||'dark';
+    var t=storageGet(CK,'ocean');
+    var m=storageGet(MK,'dark');
     var h=document.documentElement;
     THEMES.forEach(function(x){h.classList.remove(x)});
     h.classList.remove('dark','light');
@@ -2659,14 +2682,20 @@ body::before {
   /* ─────────────────────────────────────────────
      CANVAS BACKGROUND
   ───────────────────────────────────────────── */
-
-   if (matchMedia('(max-width: 768px)').matches) return;
-   
   (function canvas() {
     var cv = document.getElementById('bg-canvas');
     if (!cv) return;
-    var cx = cv.getContext('2d');
+    var hasMM = typeof window.matchMedia === 'function';
+    var lowPower =
+      (hasMM && window.matchMedia('(prefers-reduced-motion: reduce)').matches) ||
+      (hasMM && window.matchMedia('(max-width: 900px)').matches) ||
+      (navigator.deviceMemory && navigator.deviceMemory <= 4) ||
+      (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
+    if (lowPower) { cv.style.display='none'; return; }
+    var cx = cv.getContext('2d',{alpha:true,desynchronized:true});
+    if (!cx) { cv.style.display='none'; return; }
     var W, H, stars = [], verts = [], scans = [], parts = [], frame = 0;
+    var active = true, rafId = 0;
 
     var ar = [61,127,255], sr = [100,180,255], co = 'rgba(0,0,0,0)';
     function rgb(s) { var m = s.match(/[\d.]+/g); return m && m.length >= 3 ? [+m[0],+m[1],+m[2]] : [100,160,255]; }
@@ -2690,10 +2719,10 @@ body::before {
     function init() {
       resize();
       var mobile=W<768,tablet=W<1024;
-      stars=Array.from({length:mobile?20:tablet?80:160},star);
-      verts=Array.from({length:mobile?3:tablet?10:24},vert);
-      scans=Array.from({length:mobile?0:tablet?2:5},scan);
-      parts=Array.from({length:mobile?0:tablet?20:50},part);
+      stars=Array.from({length:mobile?60:tablet?100:160},star);
+      verts=Array.from({length:mobile?8:tablet?14:24},vert);
+      scans=Array.from({length:mobile?2:5},scan);
+      parts=Array.from({length:mobile?18:tablet?30:50},part);
     }
 
     function draw() {
@@ -2729,7 +2758,7 @@ body::before {
         cx.beginPath();cx.arc(p.x,p.y,p.r,0,6.28);
         cx.fillStyle='rgba('+ar[0]+','+ar[1]+','+ar[2]+','+(p.a*p.life)+')';cx.fill();
       });
-      if(frame>0&&frame%320===0&&!shoot){shoot={sx:Math.random()*W,sy:Math.random()*H*.35,t:0};}
+      if(frame%320===0&&!shoot){shoot={sx:Math.random()*W,sy:Math.random()*H*.35,t:0};}
       if(shoot){
         var s=shoot,dx=s.t*180,dy=s.t*68;
         var g=cx.createLinearGradient(s.sx+dx,s.sy+dy,s.sx+dx-80,s.sy+dy-28);
@@ -2739,21 +2768,23 @@ body::before {
         cx.strokeStyle=g;cx.lineWidth=1.5;cx.stroke();
         shoot.t+=.065;if(shoot.t>1)shoot=null;
       }
-      loop();
     }
+    function loop(){if(!active)return;draw();rafId=requestAnimationFrame(loop);}
 
     var resizeTimer;
     window.addEventListener('resize',function(){clearTimeout(resizeTimer);resizeTimer=setTimeout(function(){init();refreshColors();},150);});
-    var rafId;
-    function loop(){rafId=requestAnimationFrame(draw);}
-    document.addEventListener('visibilitychange',function(){if(document.hidden)cancelAnimationFrame(rafId);else loop();});
+    document.addEventListener('visibilitychange',function(){
+      active=!document.hidden;
+      if(active&&rafId===0)loop();
+      if(!active&&rafId){cancelAnimationFrame(rafId);rafId=0;}
+    });
     init();loop();
   })();
 
   /* ── Cursor Glow ── */
   var cg=document.getElementById('cursor-glow');
   var mx=-400,my=-400,gx=-400,gy=-400;
-  if(cg&&matchMedia('(pointer:fine)').matches){
+  if(cg&&typeof window.matchMedia==='function'&&matchMedia('(pointer:fine)').matches){
     document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;},{passive:true});
     (function tick(){gx+=(mx-gx)*.08;gy+=(my-gy)*.08;cg.style.left=gx+'px';cg.style.top=gy+'px';requestAnimationFrame(tick);})();
     document.addEventListener('mouseleave',function(){cg.style.opacity='0';});
@@ -2814,16 +2845,18 @@ body::before {
   } else els.forEach(function(el){el.classList.add('in-view');});
 
   /* ── Card Tilt ── */
-  document.querySelectorAll('.service-card,.hero__glass-card,.case-study-card,.blog-card,.process-step__card').forEach(function(c){
-    c.addEventListener('mousemove',function(e){
-      var r=c.getBoundingClientRect();
-      var dx=(e.clientX-(r.left+r.width/2))/(r.width/2);
-      var dy=(e.clientY-(r.top+r.height/2))/(r.height/2);
-      c.style.transform='translateY(-8px) rotateX('+(dy*-5)+'deg) rotateY('+(dx*5)+'deg) scale(1.01)';
-      c.style.transition='box-shadow .1s';
+  if(typeof window.matchMedia === 'function' && matchMedia('(pointer:fine)').matches){
+    document.querySelectorAll('.service-card,.hero__glass-card,.case-study-card,.blog-card').forEach(function(c){
+      c.addEventListener('mousemove',function(e){
+        var r=c.getBoundingClientRect();
+        var dx=(e.clientX-(r.left+r.width/2))/(r.width/2);
+        var dy=(e.clientY-(r.top+r.height/2))/(r.height/2);
+        c.style.transform='translateY(-8px) rotateX('+(dy*-5)+'deg) rotateY('+(dx*5)+'deg) scale(1.01)';
+        c.style.transition='box-shadow .1s';
+      });
+      c.addEventListener('mouseleave',function(){c.style.transform='';c.style.transition='transform .5s cubic-bezier(.34,1.56,.64,1),box-shadow .4s';});
     });
-    c.addEventListener('mouseleave',function(){c.style.transform='';c.style.transition='transform .5s cubic-bezier(.34,1.56,.64,1),box-shadow .4s';});
-  });
+  }
 
   /* ─────────────────────────────────────────────
      THEME SWITCHER
@@ -2843,8 +2876,8 @@ body::before {
     THEMES.forEach(function(t){h.classList.remove(t);});
     h.classList.remove('dark','light');
     h.classList.add(theme,mode);
-    localStorage.setItem(CK,theme);
-    localStorage.setItem(MK,mode);
+    storageSet(CK,theme);
+    storageSet(MK,mode);
     var tn=document.getElementById('pp-cur-name');
     if(tn){var t=THEME_LIST.find(function(x){return x.id===theme;});if(t)tn.textContent=t.label;}
     var dot=document.querySelector('.pp-trigger-dot');
@@ -2854,8 +2887,8 @@ body::before {
   }
 
   function buildSwitcher(){
-    var savedT=localStorage.getItem(CK)||'ocean';
-    var savedM=localStorage.getItem(MK)||'dark';
+    var savedT=storageGet(CK,'ocean');
+    var savedM=storageGet(MK,'dark');
     var rows=THEME_LIST.map(function(t){
       return '<button class="pp-theme-row" data-theme="'+t.id+'"><span class="pp-swatch sw-'+t.id+'"></span><span class="pp-theme-name">'+t.label+'</span><span class="pp-check">✓</span></button>';
     }).join('');
@@ -2881,10 +2914,10 @@ body::before {
     document.getElementById('ppClose').addEventListener('click',function(e){e.stopPropagation();document.getElementById('ppPanel').classList.remove('open');});
     document.addEventListener('click',function(e){var p=document.getElementById('ppPanel');if(p&&!p.contains(e.target))p.classList.remove('open');});
     document.querySelectorAll('.pp-mode-btn').forEach(function(b){
-      b.addEventListener('click',function(e){e.stopPropagation();applyTheme(localStorage.getItem(CK)||'ocean',b.dataset.mode);});
+      b.addEventListener('click',function(e){e.stopPropagation();applyTheme(storageGet(CK,'ocean'),b.dataset.mode);});
     });
     document.querySelectorAll('.pp-theme-row').forEach(function(b){
-      b.addEventListener('click',function(e){e.stopPropagation();applyTheme(b.dataset.theme,localStorage.getItem(MK)||'dark');});
+      b.addEventListener('click',function(e){e.stopPropagation();applyTheme(b.dataset.theme,storageGet(MK,'dark'));});
     });
   }
 
